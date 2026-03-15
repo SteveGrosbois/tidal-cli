@@ -104,6 +104,73 @@ tidal-cli library add --track-id 56789
 tidal-cli library remove --artist-id 7804
 ```
 
+## Claude Code Skills
+
+This project ships four [Claude Code](https://claude.ai/claude-code) skills that let you control Tidal directly from a conversation, without typing raw CLI commands.
+
+Skills are located in `skills/` and registered via `.claude/skills → skills/`.
+
+| Skill | Trigger | Description |
+|---|---|---|
+| `/tidal-auth` | Log in, authentication error | Launch OAuth flow and save session |
+| `/tidal-search` | Find music, search | Search artists, albums, or tracks |
+| `/tidal-playlist` | Playlist operations | List, create, rename, delete, add/remove content |
+| `/tidal-library` | Save/remove favorites | Add or remove artists, albums, tracks from library |
+
+### `/tidal-auth`
+
+```
+/tidal-auth
+```
+
+Starts the OAuth Device Code Flow. Displays a URL to open in your browser. After authorization, the session is saved automatically.
+
+### `/tidal-search`
+
+```
+/tidal-search <artist|album|track> <query>
+```
+
+Returns a formatted markdown table of results.
+
+```
+/tidal-search artist Daft Punk
+/tidal-search album Discovery
+/tidal-search track Around the World
+```
+
+### `/tidal-playlist`
+
+```
+/tidal-playlist <list|create|rename|delete|add-album|add-track|remove-track> [options]
+```
+
+Examples:
+
+```
+/tidal-playlist list
+/tidal-playlist create My Mix
+/tidal-playlist rename --playlist-id <ID> --name "New Name"
+/tidal-playlist delete --playlist-id <ID>
+/tidal-playlist add-album --playlist-id <ID> --album-id <ID>
+/tidal-playlist add-track --playlist-id <ID> --track-id <ID>
+/tidal-playlist remove-track --playlist-id <ID> --track-id <ID>
+```
+
+### `/tidal-library`
+
+```
+/tidal-library <add|remove> <--artist-id|--album-id|--track-id> <id>
+```
+
+Examples:
+
+```
+/tidal-library add --artist-id 7804
+/tidal-library add --album-id 1234
+/tidal-library remove --track-id 56789
+```
+
 ## Typical agent workflow
 
 ```bash
