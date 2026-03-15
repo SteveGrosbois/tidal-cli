@@ -135,8 +135,8 @@
 
 **Purpose**: Final validation and quality assurance
 
-- [ ] T021 Verify exit codes (0/1), stderr/stdout separation, and log isolation across all commands in tidal_cli.py
-- [ ] T022 Validate complete workflow per quickstart.md scenarios: auth -> search artist -> search album -> create playlist -> add album -> add track -> rename -> remove track -> delete playlist -> library add/remove
+- [x] T021 Verify exit codes (0/1), stderr/stdout separation, and log isolation across all commands in tidal_cli.py
+- [x] T022 Validate complete workflow per quickstart.md scenarios: auth -> search artist -> search album -> create playlist -> add album -> add track -> rename -> remove track -> delete playlist -> library add/remove
 
 ---
 
