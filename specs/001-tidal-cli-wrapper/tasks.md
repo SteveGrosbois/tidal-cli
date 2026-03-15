@@ -19,8 +19,8 @@
 
 **Purpose**: Project initialization and dependency declaration
 
-- [ ] T001 Create requirements.txt with tidalapi and typer dependencies
-- [ ] T002 Update .gitignore to include .tidal_session.json and Python artifacts (__pycache__, *.pyc)
+- [x] T001 Create requirements.txt with tidalapi and typer dependencies
+- [x] T002 Update .gitignore to include .tidal_session.json and Python artifacts (__pycache__, *.pyc)
 
 ---
 
@@ -30,10 +30,10 @@
 
 **CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T003 Create tidal_cli.py with Typer app skeleton: main app with `@app.callback()` for global `--json` flag, `state` dict, and three subcommand groups (`search_app`, `playlist_app`, `library_app`) registered via `app.add_typer()`
-- [ ] T004 Implement `output()` helper function in tidal_cli.py: accepts data (dict or list) and a human_formatter callable, outputs JSON (`json.dumps`) or formatted text based on `state["json_output"]`
-- [ ] T005 Implement session helpers in tidal_cli.py: `save_session(session)` writes token_type, access_token, refresh_token, expiry_time (ISO 8601) to `.tidal_session.json` with mode 600; `load_session()` reads and validates the file, calls `session.load_oauth_session()`, returns a `tidalapi.Session` or exits with error
-- [ ] T006 Add log isolation in tidal_cli.py: set `logging.getLogger("tidalapi").setLevel(logging.CRITICAL)` and same for `httpx`/`requests` loggers to prevent parasitic output on stdout/stderr
+- [x] T003 Create tidal_cli.py with Typer app skeleton: main app with `@app.callback()` for global `--json` flag, `state` dict, and three subcommand groups (`search_app`, `playlist_app`, `library_app`) registered via `app.add_typer()`
+- [x] T004 Implement `output()` helper function in tidal_cli.py: accepts data (dict or list) and a human_formatter callable, outputs JSON (`json.dumps`) or formatted text based on `state["json_output"]`
+- [x] T005 Implement session helpers in tidal_cli.py: `save_session(session)` writes token_type, access_token, refresh_token, expiry_time (ISO 8601) to `.tidal_session.json` with mode 600; `load_session()` reads and validates the file, calls `session.load_oauth_session()`, returns a `tidalapi.Session` or exits with error
+- [x] T006 Add log isolation in tidal_cli.py: set `logging.getLogger("tidalapi").setLevel(logging.CRITICAL)` and same for `httpx`/`requests` loggers to prevent parasitic output on stdout/stderr
 
 **Checkpoint**: Foundation ready - `tidal_cli.py` has app structure, output helper, session management, and clean log isolation. User story implementation can now begin.
 
@@ -47,7 +47,7 @@
 
 ### Implementation for User Story 1
 
-- [ ] T007 [US1] Implement `auth` command in tidal_cli.py: call `session.login_oauth()`, display `verification_uri_complete` on stdout, block on `future.result()`, call `save_session()`, display success message. Handle errors (timeout, network) with stderr message and exit code 1. Support both text and JSON output per contracts/cli-commands.md.
+- [x] T007 [US1] Implement `auth` command in tidal_cli.py: call `session.login_oauth()`, display `verification_uri_complete` on stdout, block on `future.result()`, call `save_session()`, display success message. Handle errors (timeout, network) with stderr message and exit code 1. Support both text and JSON output per contracts/cli-commands.md.
 
 **Checkpoint**: Authentication works end-to-end. A human can authenticate and the session file is created with restricted permissions. This is the MVP.
 
@@ -61,9 +61,9 @@
 
 ### Implementation for User Story 2
 
-- [ ] T008 [P] [US2] Implement `search artist` command in tidal_cli.py: call `session.search(query, models=[Artist], limit=20)`, format results with id and name per contracts/cli-commands.md (text and JSON modes), return empty list for no results (exit 0), handle errors with stderr and exit 1
-- [ ] T009 [P] [US2] Implement `search album` command in tidal_cli.py: call `session.search(query, models=[Album], limit=20)`, format results with id, name, artist_name (`album.artist.name`), release_year (`album.release_date.year`) per contracts/cli-commands.md, handle errors
-- [ ] T010 [P] [US2] Implement `search track` command in tidal_cli.py: call `session.search(query, models=[Track], limit=20)`, format results with id, name, artist_name (`track.artist.name`) per contracts/cli-commands.md, handle errors
+- [x] T008 [P] [US2] Implement `search artist` command in tidal_cli.py: call `session.search(query, models=[Artist], limit=20)`, format results with id and name per contracts/cli-commands.md (text and JSON modes), return empty list for no results (exit 0), handle errors with stderr and exit 1
+- [x] T009 [P] [US2] Implement `search album` command in tidal_cli.py: call `session.search(query, models=[Album], limit=20)`, format results with id, name, artist_name (`album.artist.name`), release_year (`album.release_date.year`) per contracts/cli-commands.md, handle errors
+- [x] T010 [P] [US2] Implement `search track` command in tidal_cli.py: call `session.search(query, models=[Track], limit=20)`, format results with id, name, artist_name (`track.artist.name`) per contracts/cli-commands.md, handle errors
 
 **Checkpoint**: All three search commands work. An LLM agent can discover artists, albums and tracks by name.
 
