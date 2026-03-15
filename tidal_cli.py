@@ -226,5 +226,131 @@ def search_track(
         raise typer.Exit(code=1)
 
 
+# T011: Playlist list (US3)
+@playlist_app.command("list")
+def playlist_list():
+    """List playlists created by the user."""
+    session = load_session()
+    try:
+        playlists = session.user.playlists()
+        data = [
+            {"id": str(p.id), "name": p.name, "num_tracks": p.num_tracks}
+            for p in playlists
+        ]
+
+        def fmt(data):
+            if not data:
+                return ""
+            return "\n".join(
+                f"ID: {p['id']}  Name: {p['name']} ({p['num_tracks']} tracks)"
+                for p in data
+            )
+
+        output(data, fmt)
+    except requests.exceptions.ConnectionError:
+        typer.echo(
+            "Error: Unable to connect to Tidal. Check your network connection.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    except Exception as e:
+        typer.echo(f"Error: {e}", err=True)
+        raise typer.Exit(code=1)
+
+
+# T012: Playlist create (US3)
+@playlist_app.command("create")
+def playlist_create(
+    name: str = typer.Option(..., "--name", help="Playlist name."),
+    desc: Optional[str] = typer.Option(None, "--desc", help="Playlist description."),
+):
+    """Create a new playlist."""
+    if not name.strip():
+        typer.echo("Error: Playlist name cannot be empty.", err=True)
+        raise typer.Exit(code=1)
+    session = load_session()
+    try:
+        new_playlist = session.user.create_playlist(name, desc or "")
+        data = {
+            "id": str(new_playlist.id),
+            "name": name,
+            "description": desc,
+        }
+        output(data, lambda d: f"Created playlist: ID: {d['id']}")
+    except requests.exceptions.ConnectionError:
+        typer.echo(
+            "Error: Unable to connect to Tidal. Check your network connection.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    except Exception as e:
+        typer.echo(f"Error: {e}", err=True)
+        raise typer.Exit(code=1)
+
+
+# T013: Playlist rename (US3)
+@playlist_app.command("rename")
+def playlist_rename(
+    playlist_id: str = typer.Option(..., "--playlist-id", help="Playlist ID to rename."),
+    name: str = typer.Option(..., "--name", help="New playlist name."),
+):
+    """Rename an existing playlist."""
+    session = load_session()
+    try:
+        playlist = session.playlist(playlist_id)
+        old_name = playlist.name
+        playlist.edit(title=name)
+        data = {
+            "status": "success",
+            "id": str(playlist_id),
+            "old_name": old_name,
+            "new_name": name,
+        }
+        output(data, lambda d: f'Renamed playlist "{d["old_name"]}" to "{d["new_name"]}".')
+    except requests.exceptions.HTTPError:
+        typer.echo(f"Error: Playlist not found (ID: {playlist_id}).", err=True)
+        raise typer.Exit(code=1)
+    except requests.exceptions.ConnectionError:
+        typer.echo(
+            "Error: Unable to connect to Tidal. Check your network connection.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    except Exception as e:
+        typer.echo(f"Error: {e}", err=True)
+        raise typer.Exit(code=1)
+
+
+# T014: Playlist delete (US3)
+@playlist_app.command("delete")
+def playlist_delete(
+    playlist_id: str = typer.Option(..., "--playlist-id", help="Playlist ID to delete."),
+):
+    """Delete an existing playlist."""
+    session = load_session()
+    try:
+        playlist = session.playlist(playlist_id)
+        playlist_name = playlist.name
+        playlist.delete()
+        data = {
+            "status": "success",
+            "id": str(playlist_id),
+            "name": playlist_name,
+        }
+        output(data, lambda d: f'Deleted playlist "{d["name"]}".')
+    except requests.exceptions.HTTPError:
+        typer.echo(f"Error: Playlist not found (ID: {playlist_id}).", err=True)
+        raise typer.Exit(code=1)
+    except requests.exceptions.ConnectionError:
+        typer.echo(
+            "Error: Unable to connect to Tidal. Check your network connection.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    except Exception as e:
+        typer.echo(f"Error: {e}", err=True)
+        raise typer.Exit(code=1)
+
+
 if __name__ == "__main__":
     app()

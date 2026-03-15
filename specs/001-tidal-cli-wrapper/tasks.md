@@ -77,10 +77,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T011 [P] [US3] Implement `playlist list` command in tidal_cli.py: call `session.user.playlists()`, format results with id, name, num_tracks per contracts/cli-commands.md, return empty list if none (exit 0)
-- [ ] T012 [P] [US3] Implement `playlist create` command in tidal_cli.py: accept `--name` (required) and `--desc` (optional), call `session.user.create_playlist(name, description)`, return playlist id per contracts/cli-commands.md, validate name is not empty
-- [ ] T013 [P] [US3] Implement `playlist rename` command in tidal_cli.py: accept `--playlist-id` and `--name`, fetch playlist, call `playlist.edit(title=name)`, display old and new name per contracts/cli-commands.md, handle invalid playlist ID
-- [ ] T014 [P] [US3] Implement `playlist delete` command in tidal_cli.py: accept `--playlist-id`, fetch playlist, call `playlist.delete()`, display confirmation per contracts/cli-commands.md, handle invalid playlist ID
+- [x] T011 [P] [US3] Implement `playlist list` command in tidal_cli.py: call `session.user.playlists()`, format results with id, name, num_tracks per contracts/cli-commands.md, return empty list if none (exit 0)
+- [x] T012 [P] [US3] Implement `playlist create` command in tidal_cli.py: accept `--name` (required) and `--desc` (optional), call `session.user.create_playlist(name, description)`, return playlist id per contracts/cli-commands.md, validate name is not empty
+- [x] T013 [P] [US3] Implement `playlist rename` command in tidal_cli.py: accept `--playlist-id` and `--name`, fetch playlist, call `playlist.edit(title=name)`, display old and new name per contracts/cli-commands.md, handle invalid playlist ID
+- [x] T014 [P] [US3] Implement `playlist delete` command in tidal_cli.py: accept `--playlist-id`, fetch playlist, call `playlist.delete()`, display confirmation per contracts/cli-commands.md, handle invalid playlist ID
 
 **Checkpoint**: Full playlist CRUD works. An LLM agent can manage playlists autonomously.
 
