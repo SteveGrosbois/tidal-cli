@@ -17,7 +17,7 @@
 
 **Purpose**: Create the skills directory structure
 
-- [ ] T001 Create skill directories: `skills/tidal-auth/`, `skills/tidal-search/`, `skills/tidal-playlist/`, `skills/tidal-library/`
+- [X] T001 Create skill directories: `skills/tidal-auth/`, `skills/tidal-search/`, `skills/tidal-playlist/`, `skills/tidal-library/`
 
 ---
 
@@ -29,7 +29,7 @@
 
 ### Implementation for User Story 4
 
-- [ ] T002 [US4] Create authentication skill in `skills/tidal-auth/SKILL.md` with frontmatter (name: `tidal-auth`, description, allowed-tools: `Bash`) and instructions covering: running `tidal-cli auth`, displaying the OAuth login URL, handling already-authenticated state, error handling for network issues
+- [X] T002 [US4] Create authentication skill in `skills/tidal-auth/SKILL.md` with frontmatter (name: `tidal-auth`, description, allowed-tools: `Bash`) and instructions covering: running `tidal-cli auth`, displaying the OAuth login URL, handling already-authenticated state, error handling for network issues
 
 **Checkpoint**: `/tidal-auth` should launch the OAuth process and guide the user through login
 
@@ -43,7 +43,7 @@
 
 ### Implementation for User Story 1
 
-- [ ] T003 [US1] Create search skill in `skills/tidal-search/SKILL.md` with frontmatter (name: `tidal-search`, description, allowed-tools: `Bash, Read, Grep`, argument-hint: `"<artist|album|track> <query>"`) and instructions covering:
+- [X] T003 [US1] Create search skill in `skills/tidal-search/SKILL.md` with frontmatter (name: `tidal-search`, description, allowed-tools: `Bash, Read, Grep`, argument-hint: `"<artist|album|track> <query>"`) and instructions covering:
   - Parsing `$ARGUMENTS` to determine search type (artist, album, track) and query
   - Running `tidal-cli --json search artist|album|track "<query>"`
   - Formatting JSON output as a markdown table (artist: id/name, album: id/name/artist/year, track: id/name/artist)
@@ -62,7 +62,7 @@
 
 ### Implementation for User Story 2
 
-- [ ] T004 [US2] Create playlist skill in `skills/tidal-playlist/SKILL.md` with frontmatter (name: `tidal-playlist`, description, allowed-tools: `Bash, Read, Grep`, argument-hint: `"<list|create|rename|delete|add-album|add-track|remove-track> [options]"`) and instructions covering:
+- [X] T004 [US2] Create playlist skill in `skills/tidal-playlist/SKILL.md` with frontmatter (name: `tidal-playlist`, description, allowed-tools: `Bash, Read, Grep`, argument-hint: `"<list|create|rename|delete|add-album|add-track|remove-track> [options]"`) and instructions covering:
   - Parsing `$ARGUMENTS` to determine operation and parameters
   - Running the appropriate `tidal-cli --json playlist <subcommand>` with correct flags:
     - `playlist list` — format as table (id, name, num_tracks)
@@ -87,7 +87,7 @@
 
 ### Implementation for User Story 3
 
-- [ ] T005 [US3] Create library skill in `skills/tidal-library/SKILL.md` with frontmatter (name: `tidal-library`, description, allowed-tools: `Bash, Read, Grep`, argument-hint: `"<add|remove> <--artist-id|--album-id|--track-id> <id>"`) and instructions covering:
+- [X] T005 [US3] Create library skill in `skills/tidal-library/SKILL.md` with frontmatter (name: `tidal-library`, description, allowed-tools: `Bash, Read, Grep`, argument-hint: `"<add|remove> <--artist-id|--album-id|--track-id> <id>"`) and instructions covering:
   - Parsing `$ARGUMENTS` to determine operation (add/remove) and item type/ID
   - Running `tidal-cli --json library add|remove --artist-id|--album-id|--track-id <id>`
   - Formatting confirmation message with item type, name, and action taken
@@ -101,9 +101,9 @@
 
 **Purpose**: Ensure consistency and discoverability across all skills
 
-- [ ] T006 Review all 4 SKILL.md files for consistent formatting, error handling patterns, and frontmatter structure
-- [ ] T007 Validate all 13 CLI commands are covered across the 4 skills (cross-reference with data-model.md command table)
-- [ ] T008 Run quickstart.md validation checklist against delivered skills
+- [X] T006 Review all 4 SKILL.md files for consistent formatting, error handling patterns, and frontmatter structure
+- [X] T007 Validate all 13 CLI commands are covered across the 4 skills (cross-reference with data-model.md command table)
+- [X] T008 Run quickstart.md validation checklist against delivered skills
 
 ---
 
