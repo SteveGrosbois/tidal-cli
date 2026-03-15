@@ -94,9 +94,9 @@
 
 ### Implementation for User Story 4
 
-- [ ] T015 [P] [US4] Implement `playlist add-album` command in tidal_cli.py: accept `--playlist-id` and `--album-id`, fetch album, get tracks via `album.tracks()`, extract IDs, call `playlist.add([track_ids])`, display count and names per contracts/cli-commands.md, handle invalid IDs
-- [ ] T016 [P] [US4] Implement `playlist add-track` command in tidal_cli.py: accept `--playlist-id` and `--track-id`, fetch track, call `playlist.add([track_id])`, display confirmation per contracts/cli-commands.md, handle invalid IDs
-- [ ] T017 [P] [US4] Implement `playlist remove-track` command in tidal_cli.py: accept `--playlist-id` and `--track-id`, fetch playlist tracks, find track index, call `playlist.remove_by_index(index)`, display confirmation per contracts/cli-commands.md, handle track not found in playlist
+- [x] T015 [P] [US4] Implement `playlist add-album` command in tidal_cli.py: accept `--playlist-id` and `--album-id`, fetch album, get tracks via `album.tracks()`, extract IDs, call `playlist.add([track_ids])`, display count and names per contracts/cli-commands.md, handle invalid IDs
+- [x] T016 [P] [US4] Implement `playlist add-track` command in tidal_cli.py: accept `--playlist-id` and `--track-id`, fetch track, call `playlist.add([track_id])`, display confirmation per contracts/cli-commands.md, handle invalid IDs
+- [x] T017 [P] [US4] Implement `playlist remove-track` command in tidal_cli.py: accept `--playlist-id` and `--track-id`, fetch playlist tracks, find track index, call `playlist.remove_by_index(index)`, display confirmation per contracts/cli-commands.md, handle track not found in playlist
 
 **Checkpoint**: Complete playlist content workflow works. The full agent workflow (search -> create playlist -> populate) is now functional.
 
