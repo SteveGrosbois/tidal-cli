@@ -1,0 +1,11 @@
+.claude/settings.local.json
+.tidal_session.json
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+*.egg-info/
+.DS_Store
+*.tmp
+*.swp
