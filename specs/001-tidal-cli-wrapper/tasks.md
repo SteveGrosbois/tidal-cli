@@ -124,8 +124,8 @@
 
 ### Implementation for User Story 6
 
-- [ ] T019 [P] [US6] Implement `library add` command in tidal_cli.py: accept mutually exclusive `--artist-id`, `--album-id`, `--track-id` (exactly one required), call `session.user.favorites.add_artist/add_album/add_track()`, fetch item name for confirmation, display per contracts/cli-commands.md, validate exactly one param provided, handle invalid IDs
-- [ ] T020 [P] [US6] Implement `library remove` command in tidal_cli.py: accept mutually exclusive `--artist-id`, `--album-id`, `--track-id` (exactly one required), call `session.user.favorites.remove_artist/remove_album/remove_track()`, fetch item name for confirmation, display per contracts/cli-commands.md, validate exactly one param provided, handle invalid IDs
+- [x] T019 [P] [US6] Implement `library add` command in tidal_cli.py: accept mutually exclusive `--artist-id`, `--album-id`, `--track-id` (exactly one required), call `session.user.favorites.add_artist/add_album/add_track()`, fetch item name for confirmation, display per contracts/cli-commands.md, validate exactly one param provided, handle invalid IDs
+- [x] T020 [P] [US6] Implement `library remove` command in tidal_cli.py: accept mutually exclusive `--artist-id`, `--album-id`, `--track-id` (exactly one required), call `session.user.favorites.remove_artist/remove_album/remove_track()`, fetch item name for confirmation, display per contracts/cli-commands.md, validate exactly one param provided, handle invalid IDs
 
 **Checkpoint**: Library management works. All 6 user stories are now functional.
 

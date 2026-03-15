@@ -499,5 +499,119 @@ def playlist_remove_track(
         raise typer.Exit(code=1)
 
 
+# T019: Library add (US6)
+@library_app.command("add")
+def library_add(
+    artist_id: Optional[int] = typer.Option(None, "--artist-id", help="Artist ID to add."),
+    album_id: Optional[int] = typer.Option(None, "--album-id", help="Album ID to add."),
+    track_id: Optional[int] = typer.Option(None, "--track-id", help="Track ID to add."),
+):
+    """Add an artist, album or track to the user's library."""
+    provided = sum(x is not None for x in (artist_id, album_id, track_id))
+    if provided != 1:
+        typer.echo(
+            "Error: You must provide exactly one of --artist-id, --album-id or --track-id.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    session = load_session()
+    try:
+        if artist_id is not None:
+            try:
+                artist = session.artist(artist_id)
+            except requests.exceptions.HTTPError:
+                typer.echo(f"Error: Artist not found (ID: {artist_id}).", err=True)
+                raise typer.Exit(code=1)
+            session.user.favorites.add_artist(artist_id)
+            data = {"status": "success", "type": "artist", "id": artist_id, "name": artist.name}
+            output(data, lambda d: f'Added artist "{d["name"]}" to library.')
+        elif album_id is not None:
+            try:
+                album = session.album(album_id)
+            except requests.exceptions.HTTPError:
+                typer.echo(f"Error: Album not found (ID: {album_id}).", err=True)
+                raise typer.Exit(code=1)
+            session.user.favorites.add_album(album_id)
+            data = {"status": "success", "type": "album", "id": album_id, "name": album.name}
+            output(data, lambda d: f'Added album "{d["name"]}" to library.')
+        else:
+            try:
+                track = session.track(track_id)
+            except requests.exceptions.HTTPError:
+                typer.echo(f"Error: Track not found (ID: {track_id}).", err=True)
+                raise typer.Exit(code=1)
+            session.user.favorites.add_track(track_id)
+            data = {"status": "success", "type": "track", "id": track_id, "name": track.name}
+            output(data, lambda d: f'Added track "{d["name"]}" to library.')
+    except typer.Exit:
+        raise
+    except requests.exceptions.ConnectionError:
+        typer.echo(
+            "Error: Unable to connect to Tidal. Check your network connection.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    except Exception as e:
+        typer.echo(f"Error: {e}", err=True)
+        raise typer.Exit(code=1)
+
+
+# T020: Library remove (US6)
+@library_app.command("remove")
+def library_remove(
+    artist_id: Optional[int] = typer.Option(None, "--artist-id", help="Artist ID to remove."),
+    album_id: Optional[int] = typer.Option(None, "--album-id", help="Album ID to remove."),
+    track_id: Optional[int] = typer.Option(None, "--track-id", help="Track ID to remove."),
+):
+    """Remove an artist, album or track from the user's library."""
+    provided = sum(x is not None for x in (artist_id, album_id, track_id))
+    if provided != 1:
+        typer.echo(
+            "Error: You must provide exactly one of --artist-id, --album-id or --track-id.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    session = load_session()
+    try:
+        if artist_id is not None:
+            try:
+                artist = session.artist(artist_id)
+            except requests.exceptions.HTTPError:
+                typer.echo(f"Error: Artist not found (ID: {artist_id}).", err=True)
+                raise typer.Exit(code=1)
+            session.user.favorites.remove_artist(artist_id)
+            data = {"status": "success", "type": "artist", "id": artist_id, "name": artist.name}
+            output(data, lambda d: f'Removed artist "{d["name"]}" from library.')
+        elif album_id is not None:
+            try:
+                album = session.album(album_id)
+            except requests.exceptions.HTTPError:
+                typer.echo(f"Error: Album not found (ID: {album_id}).", err=True)
+                raise typer.Exit(code=1)
+            session.user.favorites.remove_album(album_id)
+            data = {"status": "success", "type": "album", "id": album_id, "name": album.name}
+            output(data, lambda d: f'Removed album "{d["name"]}" from library.')
+        else:
+            try:
+                track = session.track(track_id)
+            except requests.exceptions.HTTPError:
+                typer.echo(f"Error: Track not found (ID: {track_id}).", err=True)
+                raise typer.Exit(code=1)
+            session.user.favorites.remove_track(track_id)
+            data = {"status": "success", "type": "track", "id": track_id, "name": track.name}
+            output(data, lambda d: f'Removed track "{d["name"]}" from library.')
+    except typer.Exit:
+        raise
+    except requests.exceptions.ConnectionError:
+        typer.echo(
+            "Error: Unable to connect to Tidal. Check your network connection.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    except Exception as e:
+        typer.echo(f"Error: {e}", err=True)
+        raise typer.Exit(code=1)
+
+
 if __name__ == "__main__":
     app()
