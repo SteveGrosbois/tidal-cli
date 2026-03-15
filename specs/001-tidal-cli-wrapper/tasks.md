@@ -110,7 +110,7 @@
 
 ### Implementation for User Story 5
 
-- [ ] T018 [US5] Enhance `load_session()` in tidal_cli.py: after `session.load_oauth_session()`, call `session.check_login()`. If True, call `save_session()` to persist any refreshed tokens. If False (refresh token expired), display error requesting re-authentication via stderr and exit 1.
+- [x] T018 [US5] Enhance `load_session()` in tidal_cli.py: after `session.load_oauth_session()`, call `session.check_login()`. If True, call `save_session()` to persist any refreshed tokens. If False (refresh token expired), display error requesting re-authentication via stderr and exit 1.
 
 **Checkpoint**: Session refresh is fully transparent. Commands work seamlessly even with expired access tokens.
 

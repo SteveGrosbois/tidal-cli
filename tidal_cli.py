@@ -89,6 +89,16 @@ def load_session() -> tidalapi.Session:
     session.load_oauth_session(
         data["token_type"], data["access_token"], data["refresh_token"], expiry_time
     )
+    # T018: Transparent session refresh (US5)
+    if session.check_login():
+        save_session(session)
+    else:
+        typer.echo(
+            "Error: Session expired. The system administrator must first run "
+            "'python tidal_cli.py auth' manually.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
     return session
 
 
