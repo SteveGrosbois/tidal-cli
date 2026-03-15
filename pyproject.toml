@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tidal-cli"
+version = "0.1.0"
+description = "Headless CLI wrapper for the Tidal API, designed for LLM agent automation."
+requires-python = ">=3.10"
+dependencies = [
+    "tidalapi>=0.8.11",
+    "typer",
+]
+
+[tool.setuptools]
+py-modules = ["tidal_cli"]
+
+[project.scripts]
+tidal-cli = "tidal_cli:app"
