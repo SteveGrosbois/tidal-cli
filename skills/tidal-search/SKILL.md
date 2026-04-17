@@ -12,18 +12,15 @@ Search for artists, albums, or tracks on Tidal and display results as a formatte
 ## Commands
 
 ### search artist
-- **Usage**: `tidal-cli --json search artist "<query>"`
-- **Arguments**: query (string)
+- **Usage**: `tidal-cli --json search --type artist --query "<query>"`
 - **Output**: `[{id, name}]`
 
 ### search album
-- **Usage**: `tidal-cli --json search album "<query>"`
-- **Arguments**: query (string)
+- **Usage**: `tidal-cli --json search --type album --query "<query>"`
 - **Output**: `[{id, name, artist, year}]`
 
 ### search track
-- **Usage**: `tidal-cli --json search track "<query>"`
-- **Arguments**: query (string)
+- **Usage**: `tidal-cli --json search --type track --query "<query>"`
 - **Output**: `[{id, name, artist}]`
 
 ## Instructions
@@ -35,9 +32,9 @@ Search for artists, albums, or tracks on Tidal and display results as a formatte
    - If no query provided after the type, ask the user to provide a search term
 
 2. Run the appropriate command based on search type:
-   - **artist**: `tidal-cli --json search artist "<query>"`
-   - **album**: `tidal-cli --json search album "<query>"`
-   - **track**: `tidal-cli --json search track "<query>"`
+   - **artist**: `tidal-cli --json search --type artist --query "<query>"`
+   - **album**: `tidal-cli --json search --type album --query "<query>"`
+   - **track**: `tidal-cli --json search --type track --query "<query>"`
 
 3. Parse the JSON array output and format as a markdown table:
    - **artist**: columns `ID` and `Name`

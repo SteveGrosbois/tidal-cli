@@ -6,6 +6,7 @@ import logging
 import os
 import stat
 from datetime import datetime
+from enum import Enum
 from pathlib import Path
 from typing import Optional
 
@@ -18,6 +19,12 @@ logging.getLogger("tidalapi").setLevel(logging.CRITICAL)
 logging.getLogger("requests").setLevel(logging.CRITICAL)
 logging.getLogger("httpx").setLevel(logging.CRITICAL)
 logging.getLogger("urllib3").setLevel(logging.CRITICAL)
+
+class SearchType(str, Enum):
+    artist = "artist"
+    album = "album"
+    track = "track"
+
 
 # T003: App skeleton
 app = typer.Typer(add_completion=False)
@@ -129,6 +136,26 @@ def auth():
             "Error: Authentication failed or expired. Please try again.", err=True
         )
         raise typer.Exit(code=1)
+
+
+@search_app.callback(invoke_without_command=True)
+def search_main(
+    ctx: typer.Context,
+    type: Optional[SearchType] = typer.Option(None, "--type", help="Type: artist, album, track."),
+    query: Optional[str] = typer.Option(None, "--query", help="Search query."),
+):
+    """Search the Tidal catalog."""
+    if ctx.invoked_subcommand is not None:
+        return
+    if type is None or query is None:
+        typer.echo(ctx.get_help())
+        raise typer.Exit()
+    if type == SearchType.artist:
+        search_artist(query)
+    elif type == SearchType.album:
+        search_album(query)
+    elif type == SearchType.track:
+        search_track(query)
 
 
 # T008: Search artist (US2)

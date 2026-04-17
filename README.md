@@ -49,18 +49,18 @@ tidal-cli --json search artist "Daft Punk"
 
 ### Search
 
+Two syntaxes are supported:
+
 ```bash
-# Search for an artist
+# Subcommand style
 tidal-cli search artist "Daft Punk"
-# ID: 7804  Name: Daft Punk
-
-# Search for an album
 tidal-cli search album "Discovery"
-# ID: 1234  Artist: Daft Punk  Year: 2001  Name: Discovery
-
-# Search for a track
 tidal-cli search track "Around the World"
-# ID: 56789  Artist: Daft Punk  Name: Around the World
+
+# Option style (--type / --query)
+tidal-cli search --type artist --query "Daft Punk"
+tidal-cli search --type album --query "Discovery"
+tidal-cli search --type track --query "Around the World"
 ```
 
 ### Playlist management
@@ -175,10 +175,10 @@ Examples:
 
 ```bash
 # 1. Search for an artist
-tidal-cli --json search artist "Daft Punk"
+tidal-cli --json search --type artist --query "Daft Punk"
 
 # 2. Search for an album
-tidal-cli --json search album "Discovery"
+tidal-cli --json search --type album --query "Discovery"
 
 # 3. Create a playlist
 tidal-cli --json playlist create --name "Electronic Classics"
